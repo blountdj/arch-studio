@@ -8,8 +8,6 @@
     min-height: 0vw;
 }
 
-
-
 #page-identifier-wrapper {
     margin-left: clamp(38px, calc(2.375rem + ((1vw - 9.22px) * 14.0449)), 63px);
     margin-right: clamp(35px, calc(2.1875rem + ((1vw - 9.22px) * 24.1573)), 78px);

@@ -1,10 +1,27 @@
 #nav-menu-footer {
-    padding-left: clamp(22px, calc(1.375rem + ((1vw - 9.92px) * 58.3333)), 85px);
+    padding-left: clamp(22px, calc(1.375rem + ((1vw - 11.5px) * 25.2)), 85px);
     min-height: 0vw;
+
+    grid-column-gap: clamp(20px, calc(1.25rem + ((1vw - 9.92px) * 10.049)), 61px);
+    grid-row-gap: clamp(20px, calc(1.25rem + ((1vw - 9.92px) * 10.049)), 61px);
 }
 
 #footer-logo {
-  padding-left: clamp(30px, calc(1.875rem + ((1vw - 9.22px) * 12.3596)), 52px);
-  padding-right: clamp(30px, calc(1.875rem + ((1vw - 9.22px) * 12.3596)), 52px);
+  padding-left: clamp(30px, calc(1.875rem + ((1vw - 9.92px) * 5.3922)), 52px);
+  padding-right: clamp(30px, calc(1.875rem + ((1vw - 9.92px) * 5.3922)), 52px);
   min-height: 0vw;
+}
+
+@media (max-width: 991px) {
+    #nav-menu-footer {
+        padding-left: 40px;
+        grid-column-gap: 61px;
+        grid-row-gap: 61px;
+    }
+}
+
+@media (max-width: 767px) {
+    #nav-menu-footer {
+        padding-left: 0px;
+    }
 }
