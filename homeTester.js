@@ -1,6 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-    console.log('home.js')
+ 
+    console.log('homeTester.js')
     
     const heroSlide01 = document.querySelector('[data-slide="01"]');
     const heroSlide02 = document.querySelector('[data-slide="02"]');
@@ -78,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function init() {
-
+        console.log('homeTester.js init')
         heroSlide01.style.display = 'flex';
         heroSlide02.style.display = 'none';
         heroSlide03.style.display = 'none';
@@ -92,4 +91,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     init()
-})
