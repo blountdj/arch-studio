@@ -1,10 +1,14 @@
 console.log('barbaInit.js loaded')
 
-import { textSplit } from "./utilities.js";
+import { 
+    textSplit,
+    removeScriptFromBody,
+    addScriptToBody
+} from "./utilities.js";
 
 
 const pageIdentifierTextEnter = async (data) => {
-    console.log('\n\n### pageIdentifierTextEnter')
+    // console.log('\n\n### pageIdentifierTextEnter')
 
     let pageIdentifierTextElem = data.next.container.querySelector('.page-identifer-text')
     // console.log('pageIdentifierTextElem - barba.hooks.enter:', pageIdentifierTextElem)
@@ -30,10 +34,10 @@ const pageIdentifierTextEnter = async (data) => {
 }
 
 const pageIdentifierTextLeave = (data) => {
-    console.log('pageIdentifierTextLeave')
-    console.log('data.next.namespace:', data.next.namespace)
+    // console.log('pageIdentifierTextLeave')
+    // console.log('data.next.namespace:', data.next.namespace)
     let pageIdentifierTextElem = document.querySelector('.page-identifer-text')
-    console.log('pageIdentifierTextElem0:', pageIdentifierTextElem)
+    // console.log('pageIdentifierTextElem0:', pageIdentifierTextElem)
 
     return new Promise((resolve) => {
         // gsap.set(pageIdentifierTextSplit.chars, { opacity: 0 });
@@ -54,7 +58,7 @@ const pageIdentifierTextLeave = (data) => {
 }
 
 const animationFadeInEnter = ((data) => {
-    console.log('------animationFadeInEnter')
+    // console.log('------animationFadeInEnter')
     // gsap.from(container, {
     gsap.to('.barba-main-container', {
         duration: 2,
@@ -92,17 +96,20 @@ const animationFadeOutLeave = (data) => {
 };
 
 
+
+
+
 barba.hooks.beforeEnter(() => {
-    // window.scrollTo(0, 0); // Scroll to the top of the page
+    window.scrollTo(0, 0); // Scroll to the top of the page
 });
 
 barba.hooks.once(() => {
     console.log('barba.hooks.once')
     let pageIdentifierTextElem = document.querySelector('.page-identifer-text')
-    console.log(pageIdentifierTextElem)
+    // console.log(pageIdentifierTextElem)
 
     let pageIdentifierTextSplit = textSplit(pageIdentifierTextElem)
-    console.log('pageIdentifierTextSplit - testText:', pageIdentifierTextSplit)
+    // console.log('pageIdentifierTextSplit - testText:', pageIdentifierTextSplit)
 
     gsap.set(pageIdentifierTextSplit.chars, {
         opacity: 0,
@@ -155,29 +162,23 @@ barba.hooks.enter((data) => {
     // })
 })
 
+
+const homeJsFileUrl = `http://127.0.0.1:5500/homeTester.js`
+const aboutJsFileUrl = `http://127.0.0.1:5500/aboutTester.js`
+const contactJsFileUrl = `http://127.0.0.1:5500/contactTester.js`
+const testerJsFileUrl = `http://127.0.0.1:5500/tester.js`
+// const pageSpecificScriptUrl = `https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v1/home.js`
+
 barba.hooks.afterEnter((data) => {
-    console.log('barba.hooks.afterEnter')
+    // console.log('barba.hooks.afterEnter')
     const currentPageId = data.next.namespace; // Assuming your container has an ID that matches the page
-    console.log('currentPageId:', currentPageId)
-    // const pageSpecificScriptUrl = `scripts/${currentPageId}.js`; // Adjust the URL as needed
-    // const pageSpecificScriptUrl = `https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v1/home.js`
+    // console.log('currentPageId:', currentPageId)
+        
+    currentPageId === 'home' ? addScriptToBody(homeJsFileUrl) : removeScriptFromBody(homeJsFileUrl)
+    currentPageId === 'about us' ? addScriptToBody(aboutJsFileUrl) : removeScriptFromBody(aboutJsFileUrl)
+    currentPageId === 'contact' ? addScriptToBody(contactJsFileUrl) : removeScriptFromBody(contactJsFileUrl)
     
-    if (currentPageId === 'home') {
-        const pageSpecificScriptUrl = `http://127.0.0.1:5500/homeTester.js`
-        const script = document.createElement('script');
-        script.src = pageSpecificScriptUrl;
-        document.body.appendChild(script);
-    }
-    
-        const pageSpecificScriptUrl = `http://127.0.0.1:5500/tester.js`
-    
-    
-
-
-    // const script2 = document.createElement('script');
-    // script2.src = pageSpecificScriptUrl2;
-    // document.body.appendChild(script2);
-  });
+});
 
 
 barba.init({
@@ -190,11 +191,11 @@ barba.init({
             // to: { namespace: ['todo'] },
             once() {},
             async leave(data) {
-                console.log('\n\nLEAVE')
+                // console.log('\n\nLEAVE')
                 await animationFadeOutLeave(data);
             },
             async enter(data) {
-                console.log('\n\nENTER')
+                // console.log('\n\nENTER')
 
                 await animationFadeInEnter(data);
             },
