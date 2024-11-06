@@ -1,11 +1,18 @@
 console.log('barbaInit.js loaded')
 
+import { CONFIG } from "./config.js";
+import { homeInit } from "./home.js";
+import { homeAnimationInit, homeAnimationEnter } from "./homeAnimations.js";
 import { 
     textSplit,
     removeScriptFromBody,
-    addScriptToBody
+    addScriptToBody,
+    disableScroll,
+    enableScroll,
+    addFilesCssToBody,
+    removeCssFilesFromBody,
 } from "./utilities.js";
-
+import { imgTransitionAnimation, introElementsReset } from "./animations.js";
 
 const pageIdentifierTextEnter = async (data) => {
     // console.log('\n\n### pageIdentifierTextEnter')
@@ -96,78 +103,79 @@ const animationFadeOutLeave = (data) => {
 };
 
 
-
-
-
-barba.hooks.beforeEnter(() => {
-    window.scrollTo(0, 0); // Scroll to the top of the page
-});
-
-barba.hooks.once(() => {
-    console.log('barba.hooks.once')
-    let pageIdentifierTextElem = document.querySelector('.page-identifer-text')
-    // console.log(pageIdentifierTextElem)
-
-    let pageIdentifierTextSplit = textSplit(pageIdentifierTextElem)
-    // console.log('pageIdentifierTextSplit - testText:', pageIdentifierTextSplit)
-
-    gsap.set(pageIdentifierTextSplit.chars, {
-        opacity: 0,
-    })
-    gsap.to(pageIdentifierTextSplit.chars, {
-        opacity: 1,
-        duration: 2.575,
-        stagger: {
-            from: "random",
-            each: 0.075,
-        },
-        ease: "power2.out",
-        onStart: () => {
-            gsap.set(pageIdentifierTextElem, {
-                opacity: 1,
-            },
-            animationFadeInEnter(null))
-        }
-    })
-});
-
-
-barba.hooks.enter((data) => {
-    // console.log('\n\n### barba.hooks.afterEnter')
-
-    // let pageIdentifierTextElem = data.next.container.querySelector('.page-identifer-text')
-    // console.log('pageIdentifierTextElem - barba.hooks.enter:', pageIdentifierTextElem)
-
-    // let pageIdentifierTextSplit = textSplit(pageIdentifierTextElem)
-    // console.log('pageIdentifierTextSplit - barba.hooks.enter:', pageIdentifierTextSplit)
-    // return new Promise((resolve) => {
-    //     gsap.set('.page-identifer-text', {opacity: 1})
-    //     gsap.to('.char', {
-    //     // gsap.to(pageIdentifierTextSplit.chars, {
-    //         opacity: 1,
-    //         duration: 5.575,
-    //         stagger: {
-    //             from: "random",
-    //             each: 0.075,
-    //         },
-    //         ease: "power2.out",
-    //         // onStart: () => {
-    //         //     // pageIdentifierTextElem.append = pageIdentifierTextSplit.chars
-    //         //     // animationFadeInEnter();
-    //         // },
-    //         onComplete: () => {
-    //             resolve()
-    //         }
-    //     })
-    // })
-})
-
-
 const homeJsFileUrl = `http://127.0.0.1:5500/homeTester.js`
 const aboutJsFileUrl = `http://127.0.0.1:5500/aboutTester.js`
 const contactJsFileUrl = `http://127.0.0.1:5500/contactTester.js`
+const portfolioJsFileUrl = `http://127.0.0.1:5500/portfolio.js`
 const testerJsFileUrl = `http://127.0.0.1:5500/tester.js`
+
+const portfolioCssFileUrl = `http://127.0.0.1:5500/portfolio.css`
+
 // const pageSpecificScriptUrl = `https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v1/home.js`
+
+
+
+
+const introAnimation = async (data) => {
+    console.log('introAnimation');
+    return new Promise(async (resolve) => {
+        await imgTransitionAnimation(data);
+        let pageIdentifierTextElem = document.querySelector('.page-identifer-text')
+        textSplit(pageIdentifierTextElem)
+        gsap.set('.page-identifer-text > .word > .char', {color: 'white'})
+        gsap.to('.page-identifer-text > .word > .char', {
+            opacity: 1,
+            duration: 2.575,
+
+            color: '#c8ccd8',
+            stagger: {
+                from: "random",
+                each: 0.075,
+            },
+            ease: "power2.out",
+            onStart: () => {
+                gsap.set(pageIdentifierTextElem, {
+                    opacity: 1,
+                },
+                animationFadeInEnter(null))
+            },
+        })
+        setTimeout(() => {
+            enableScroll()
+            resolve()
+        }, 100);
+    });
+};
+
+
+barba.hooks.beforeEnter((data) => {
+    // window.scrollTo(0, 0); // Scroll to the top of the page
+    console.log('chicken shit')
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+        disableScroll()
+        gsap.set('.page-identifer-text > .word > .char', {
+            color: 'white',
+        })
+    }, 100); // Adjust the delay time as needed
+
+    if (data.next.namespace === 'home') {
+        homeAnimationInit(data.next.container)
+    }
+});
+
+
+barba.hooks.once(async (data) => {
+    console.log('barba.hooks.once');
+    // introAnimation(data, 3.25)
+    await introAnimation(data)
+
+    if (data.next.namespace === 'home') {
+        homeInit(data.next.container)
+        homeAnimationEnter(data.next.container)
+    }
+});
+
 
 barba.hooks.afterEnter((data) => {
     // console.log('barba.hooks.afterEnter')
@@ -178,11 +186,14 @@ barba.hooks.afterEnter((data) => {
     currentPageId === 'about us' ? addScriptToBody(aboutJsFileUrl) : removeScriptFromBody(aboutJsFileUrl)
     currentPageId === 'contact' ? addScriptToBody(contactJsFileUrl) : removeScriptFromBody(contactJsFileUrl)
     
+    currentPageId === 'portfolio' ? addScriptToBody(portfolioJsFileUrl) : removeScriptFromBody(portfolioJsFileUrl)
+    currentPageId === 'portfolio' ? addFilesCssToBody([portfolioCssFileUrl]) : removeCssFilesFromBody([portfolioCssFileUrl] )
+    
 });
 
 
 barba.init({
-    debug: false,
+    debug: CONFIG.barbaDebug,
     sync: false,
     views: [],
     transitions: [
@@ -192,12 +203,23 @@ barba.init({
             once() {},
             async leave(data) {
                 // console.log('\n\nLEAVE')
-                await animationFadeOutLeave(data);
+                animationFadeOutLeave(data);
+                await introElementsReset()
+
+                if (data.next.namespace === 'home') {
+                    homeInit(data.next.container)
+                }
+                
             },
             async enter(data) {
-                // console.log('\n\nENTER')
-
+                console.log('\n\nENTER')
+                // introAnimation(data)
+                introAnimation(data);
                 await animationFadeInEnter(data);
+
+                if (data.next.namespace === 'home') {
+                    homeAnimationEnter(data.next.container)
+                }
             },
         },
     ]
