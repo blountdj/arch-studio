@@ -3,6 +3,9 @@ console.log('barbaInit.js loaded')
 import { CONFIG } from "./config.js";
 import { homeInit } from "./home.js";
 import { homeAnimationInit, homeAnimationEnter } from "./homeAnimations.js";
+import { initPortfolio, animatePortfolioEnter } from "./portfolio.js";
+import { aboutAnimationInit, aboutAnimationEnter } from "./aboutAnimations.js";
+import { contactAnimationInit, contactAnimationEnter } from "./contactAnimations.js";
 import { 
     textSplit,
     removeScriptFromBody,
@@ -24,8 +27,8 @@ const pageIdentifierTextEnter = async (data) => {
 
     return new Promise((resolve) => {
         gsap.set('.page-identifer-text', {opacity: 1})
-        gsap.set('.char', {opacity: 0})
-        gsap.to('.char', {
+        gsap.set('.page-identifer-text > .word >.char', {opacity: 0})
+        gsap.to('.page-identifer-text > .word > .char', {
             opacity: 1,
             duration: 1.575,
             stagger: {
@@ -103,7 +106,7 @@ const animationFadeOutLeave = (data) => {
 };
 
 
-const homeJsFileUrl = `http://127.0.0.1:5500/homeTester.js`
+const homeJsFileUrl = `http://127.0.0.1:5500/home.js`
 const aboutJsFileUrl = `http://127.0.0.1:5500/aboutTester.js`
 const contactJsFileUrl = `http://127.0.0.1:5500/contactTester.js`
 const portfolioJsFileUrl = `http://127.0.0.1:5500/portfolio.js`
@@ -128,6 +131,7 @@ const introAnimation = async (data) => {
             duration: 2.575,
 
             color: '#c8ccd8',
+            // color: 'green',
             stagger: {
                 from: "random",
                 each: 0.075,
@@ -149,8 +153,8 @@ const introAnimation = async (data) => {
 
 
 barba.hooks.beforeEnter((data) => {
-    // window.scrollTo(0, 0); // Scroll to the top of the page
-    console.log('chicken shit')
+//     // window.scrollTo(0, 0); // Scroll to the top of the page
+    console.log('## BEFORE ENTER')
     setTimeout(() => {
         window.scrollTo(0, 0);
         disableScroll()
@@ -158,9 +162,19 @@ barba.hooks.beforeEnter((data) => {
             color: 'white',
         })
     }, 100); // Adjust the delay time as needed
+    
+    const currentPageId = data.next.namespace;
+    currentPageId === 'portfolio' ? addScriptToBody(portfolioJsFileUrl) : removeScriptFromBody(portfolioJsFileUrl)
+    currentPageId === 'portfolio' ? addFilesCssToBody([portfolioCssFileUrl]) : removeCssFilesFromBody([portfolioCssFileUrl] )
 
     if (data.next.namespace === 'home') {
         homeAnimationInit(data.next.container)
+    } else if (data.next.namespace === 'portfolio') {
+        initPortfolio(data.next.container)
+    } else if (data.next.namespace === 'about us') {
+        aboutAnimationInit(data.next.container)
+    } else if (data.next.namespace === 'contact') {
+        contactAnimationInit(data.next.container)
     }
 });
 
@@ -173,6 +187,12 @@ barba.hooks.once(async (data) => {
     if (data.next.namespace === 'home') {
         homeInit(data.next.container)
         homeAnimationEnter(data.next.container)
+    } else if (data.next.namespace === 'portfolio') {
+        animatePortfolioEnter(data.next.container)
+    } else if (data.next.namespace === 'about us') {
+        aboutAnimationEnter(data.next.container)
+    } else if (data.next.namespace === 'contact') {
+        contactAnimationEnter(data.next.container)
     }
 });
 
@@ -186,8 +206,8 @@ barba.hooks.afterEnter((data) => {
     currentPageId === 'about us' ? addScriptToBody(aboutJsFileUrl) : removeScriptFromBody(aboutJsFileUrl)
     currentPageId === 'contact' ? addScriptToBody(contactJsFileUrl) : removeScriptFromBody(contactJsFileUrl)
     
-    currentPageId === 'portfolio' ? addScriptToBody(portfolioJsFileUrl) : removeScriptFromBody(portfolioJsFileUrl)
-    currentPageId === 'portfolio' ? addFilesCssToBody([portfolioCssFileUrl]) : removeCssFilesFromBody([portfolioCssFileUrl] )
+    // currentPageId === 'portfolio' ? addScriptToBody(portfolioJsFileUrl) : removeScriptFromBody(portfolioJsFileUrl)
+    // currentPageId === 'portfolio' ? addFilesCssToBody([portfolioCssFileUrl]) : removeCssFilesFromBody([portfolioCssFileUrl] )
     
 });
 
@@ -202,13 +222,13 @@ barba.init({
             // to: { namespace: ['todo'] },
             once() {},
             async leave(data) {
-                // console.log('\n\nLEAVE')
+                console.log('\n\nLEAVE')
                 animationFadeOutLeave(data);
                 await introElementsReset()
 
-                if (data.next.namespace === 'home') {
-                    homeInit(data.next.container)
-                }
+                // if (data.next.namespace === 'home') {
+                //     homeInit(data.next.container)
+                // } 
                 
             },
             async enter(data) {
@@ -218,9 +238,27 @@ barba.init({
                 await animationFadeInEnter(data);
 
                 if (data.next.namespace === 'home') {
-                    homeAnimationEnter(data.next.container)
+                    homeInit(data.next.container)
+                    setTimeout(() => {
+                        homeAnimationEnter(data.next.container)
+                    }, 3000);
+                } else if (data.next.namespace === 'portfolio') {
+                    setTimeout(() => {
+                        animatePortfolioEnter(data.next.container)
+                    }, 3250);
+                } else if (data.next.namespace === 'about us') {
+                    setTimeout(() => {
+                        aboutAnimationEnter(data.next.container)
+                    }, 3250);
+                } else if (data.next.namespace === 'contact') {
+                    setTimeout(() => {
+                        contactAnimationEnter(data.next.container)
+                    }, 3250);
                 }
+
+                console.log('FINISH ENTER')
             },
         },
     ]
 });
+

@@ -67,9 +67,9 @@ div.gallery {
     max-width: none !important;
   }
 
-  div.gallery-item-text-wrapper {
+  /* div.gallery-item-text-wrapper {
     transition: opacity 0.5s ease-in-out;
-  }
+  } */
 
   .heading-s, .paragraph {
     color: inherit;

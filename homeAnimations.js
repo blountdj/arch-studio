@@ -53,9 +53,9 @@ function fadeInSlideUp(elem) {
 function headingFontWeightAnimation(elem) {
     gsap.to(elem, {
         fontWeight: 900,
-        duration: 1.5,
+        duration: 0.8,
         stagger: {
-            each: 0.075,
+            each: 0.055,
         },
         ease: 'power2.out',
     })

@@ -1,18 +1,17 @@
-console.log('portfolio-copy.js')
+console.log('portfolio.js')
 
 import { textSplit } from './utilities.js';
 
-const galleryContainer = document.querySelector(".gallery");
-const galleryItems = galleryContainer.querySelectorAll(".gallery-item");
 
 const defaultItemFlex = "0 1 32px";
 const hoverItemFlex = "1 1 600px";
 
 
-
-export function initPortfolio() {
-    const portfolioTextHeadings = document.querySelectorAll('.heading-s');
-    const portfolioTextDates = document.querySelectorAll('.paragraph');
+export function initPortfolio(container) {
+    console.log('initPortfolio')
+    const portfolioTextHeadings = container.querySelectorAll('.heading-s');
+    const portfolioTextDates = container.querySelectorAll('.paragraph');
+    const gallery = container.querySelector('.gallery');
 
     portfolioTextHeadings.forEach(heading => {
         textSplit(heading);
@@ -21,26 +20,45 @@ export function initPortfolio() {
     portfolioTextDates.forEach(date => {
         textSplit(date);
     })
+
+    const galleryContainer = container.querySelector(".gallery");
+    const galleryItems = galleryContainer.querySelectorAll(".gallery-item");
+
+    galleryItems[0].isHovered = true;
+    updategalleryItems('init', galleryItems);
+
+    galleryItems.forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+            galleryItems.forEach((otherItem) => {
+                otherItem.isHovered = otherItem === item;
+            });
+            updategalleryItems('mouseenter', galleryItems);
+        });
+    });
+
+    gsap.set(gallery, {
+        opacity: 0,
+        yPercent: 50,
+    })
 }
 
-initPortfolio()
 
-const updategalleryItems = () => {
-  galleryItems.forEach((item) => {
-    const galleryItemTextWrapper = item.querySelector('.gallery-item-text-wrapper');
-    const galleryItemChars = item.querySelectorAll('.gallery-item-text-wrapper-wrapper > div > .word > .char ');
+export function animatePortfolioEnter(container) {
+    console.log('animatePortfolioEnter')
+    const gallery = container.querySelector('.gallery');
+    gsap.to(gallery, {
+        opacity: 1,
+        yPercent: 0,
+        duration: 0.75,
+        ease: 'power4.inOut',
+    })
+}
 
-    let flex = defaultItemFlex;
-    let opacity = 0;
-    let color = 'transparent';
-
-    if (item.isHovered) {
-      flex = hoverItemFlex;
-      opacity = 1;
-      color = 'white';
-      gsap.to(galleryItemChars, {
+const staggerFadeLettersIn = (elem) => {
+    console.log('!!!staggerFadeLettersIn!!!')
+    gsap.to(elem, {
         color: 'white',
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power2.inOut',
         stagger: {
             from: "random",
@@ -50,28 +68,33 @@ const updategalleryItems = () => {
             // Animation completed
         }
     })
-    }
-    else {
-        galleryItemChars.forEach(char => {
-            char.style.color = 'transparent';
-        })
-    }
+}
 
-    item.style.flex = flex;
-    galleryItemTextWrapper.style.opacity = opacity;
-  });
+
+const updategalleryItems = (type, galleryItems) => {
+    console.log('updategalleryItems:', type)
+
+    galleryItems.forEach((item) => {
+        const galleryItemTextWrapper = item.querySelector('.gallery-item-text-wrapper');
+        const galleryItemChars = item.querySelectorAll('.gallery-item-text-wrapper-wrapper > div > .word > .char ');
+
+        let flex = defaultItemFlex;
+        let opacity = 0;
+
+        if (item.isHovered) {
+
+            flex = hoverItemFlex;
+            opacity = 1;
+            staggerFadeLettersIn(galleryItemChars)
+
+        } else {
+            galleryItemChars.forEach(char => {
+                char.style.color = 'transparent';
+            })
+        }
+
+        item.style.flex = flex;
+        galleryItemTextWrapper.style.opacity = opacity;
+    });  
 };
-
-galleryItems[0].isHovered = true;
-updategalleryItems();
-
-galleryItems.forEach((item) => {
-  item.addEventListener("mouseenter", () => {
-    galleryItems.forEach((otherItem) => {
-      otherItem.isHovered = otherItem === item;
-    });
-    updategalleryItems();
-  });
-});
-
 
