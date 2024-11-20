@@ -8,7 +8,7 @@ const hoverItemFlex = "1 1 600px";
 
 
 export function initPortfolio(container) {
-    console.log('initPortfolio')
+    // console.log('initPortfolio')
     const portfolioTextHeadings = container.querySelectorAll('.heading-s');
     const portfolioTextDates = container.querySelectorAll('.paragraph');
     const gallery = container.querySelector('.gallery');
@@ -34,6 +34,13 @@ export function initPortfolio(container) {
             });
             updategalleryItems('mouseenter', galleryItems);
         });
+        item.addEventListener("mouseleave", () => {
+            galleryItems.forEach((otherItem) => {
+                const itemTextWrapper = otherItem.querySelector('.gallery-item-text-wrapper');
+                gsap.to(itemTextWrapper, {opacity: 0, duration: 0.15, ease: 'power5.inOut'})
+            });
+        });
+        
     });
 
     gsap.set(gallery, {
@@ -44,7 +51,7 @@ export function initPortfolio(container) {
 
 
 export function animatePortfolioEnter(container) {
-    console.log('animatePortfolioEnter')
+    // console.log('animatePortfolioEnter')
     const gallery = container.querySelector('.gallery');
     gsap.to(gallery, {
         opacity: 1,
@@ -55,7 +62,7 @@ export function animatePortfolioEnter(container) {
 }
 
 const staggerFadeLettersIn = (elem) => {
-    console.log('!!!staggerFadeLettersIn!!!')
+    // console.log('!!!staggerFadeLettersIn!!!')
     gsap.to(elem, {
         color: 'white',
         duration: 0.5,
@@ -80,12 +87,17 @@ const updategalleryItems = (type, galleryItems) => {
 
         let flex = defaultItemFlex;
         let opacity = 0;
+        let delay;
+        delay = type === 'mouseenter' ? 750 : 10;
 
         if (item.isHovered) {
 
             flex = hoverItemFlex;
             opacity = 1;
-            staggerFadeLettersIn(galleryItemChars)
+            delay = 1000;
+            setTimeout(() => {
+                staggerFadeLettersIn(galleryItemChars)
+            }, delay)
 
         } else {
             galleryItemChars.forEach(char => {
@@ -94,7 +106,10 @@ const updategalleryItems = (type, galleryItems) => {
         }
 
         item.style.flex = flex;
-        galleryItemTextWrapper.style.opacity = opacity;
+        setTimeout(() => {    
+            galleryItemTextWrapper.style.opacity = opacity;
+        }, delay)
+
     });  
 };
 

@@ -45,9 +45,9 @@ function imageReveal() {
 
 export function aboutAnimationInit(container) {
     console.log('aboutAnimationInit')
-    const headingContainer = container.querySelector('.about-hero')
-    const headingWidth = headingContainer.offsetWidth;  
-    gsap.set(headingContainer, { width: headingWidth });
+    // const headingContainer = container.querySelector('.about-hero')
+    // const headingWidth = headingContainer.offsetWidth;  
+    // gsap.set(headingContainer, { width: headingWidth });
 
 
     const heading = container.querySelector('.heading-xl--about')

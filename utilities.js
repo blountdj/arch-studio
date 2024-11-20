@@ -18,14 +18,14 @@ export function addScriptToBody(srcUrl) {
     document.body.appendChild(script);
 }
 
-// Disable scrolling
+
 export function disableScroll() {
   // console.log('disableScroll')
   // window.addEventListener('scroll', preventDefault);
   document.body.style.overflow = 'hidden';
 }
 
-// Enable scrolling
+
 export function enableScroll() {
   // console.log('enableScroll')
   document.body.style.overflow = 'auto';

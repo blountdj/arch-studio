@@ -10,9 +10,10 @@ const createMaskBoxes = (mask) => {
 
 export function homeAnimationInit(container) {
     console.log('homeAnimationInit')
-    const headingContainer = container.querySelector('.welcome-main')
-    const headingWidth = headingContainer.offsetWidth;  
-    gsap.set(headingContainer, { width: headingWidth });
+    // const headingContainer = container.querySelector('.welcome-main')
+    // const headingWidth = headingContainer.offsetWidth;  
+    // console.log('headingWidth:', headingWidth)
+    // gsap.set(headingContainer, { width: headingWidth });
 
 
     const heading = container.querySelector('#welcome-h2')
