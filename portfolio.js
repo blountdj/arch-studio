@@ -79,7 +79,7 @@ const staggerFadeLettersIn = (elem) => {
 
 
 const updategalleryItems = (type, galleryItems) => {
-    console.log('updategalleryItems:', type)
+    // console.log('updategalleryItems:', type)
 
     galleryItems.forEach((item) => {
         const galleryItemTextWrapper = item.querySelector('.gallery-item-text-wrapper');
