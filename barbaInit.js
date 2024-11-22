@@ -113,6 +113,7 @@ const portfolioJsFileUrl = `http://127.0.0.1:5500/portfolio.js`
 const testerJsFileUrl = `http://127.0.0.1:5500/tester.js`
 
 const portfolioCssFileUrl = `http://127.0.0.1:5500/portfolio.css`
+const homeCssFileUrl = `http://127.0.0.1:5500/home.css`
 
 // const pageSpecificScriptUrl = `https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v1/home.js`
 
@@ -166,6 +167,7 @@ barba.hooks.beforeEnter((data) => {
     const currentPageId = data.next.namespace;
     currentPageId === 'portfolio' ? addScriptToBody(portfolioJsFileUrl) : removeScriptFromBody(portfolioJsFileUrl)
     currentPageId === 'portfolio' ? addFilesCssToBody([portfolioCssFileUrl]) : removeCssFilesFromBody([portfolioCssFileUrl] )
+    currentPageId === 'home' ? addFilesCssToBody([homeCssFileUrl]) : removeCssFilesFromBody([homeCssFileUrl] )
 
     if (data.next.namespace === 'home') {
         homeAnimationInit(data.next.container)

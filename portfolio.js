@@ -2,48 +2,81 @@ console.log('portfolio.js')
 
 import { textSplit } from './utilities.js';
 
-
 const defaultItemFlex = "0 1 32px";
 const hoverItemFlex = "1 1 600px";
 
 
+export const getPortfolioElement = (container) => {
+    return {
+        portfolioTextHeadings: container.querySelectorAll('.heading-s'),
+        portfolioTextDates: container.querySelectorAll('.paragraph'),
+        gallery: container.querySelector('.gallery'),
+        galleryContainer: container.querySelector(".gallery")
+    }
+}
+
+function getScreenWidth() {
+    return window.innerWidth;
+}
+
 export function initPortfolio(container) {
     // console.log('initPortfolio')
-    const portfolioTextHeadings = container.querySelectorAll('.heading-s');
-    const portfolioTextDates = container.querySelectorAll('.paragraph');
-    const gallery = container.querySelector('.gallery');
 
-    portfolioTextHeadings.forEach(heading => {
+    const portfolio = getPortfolioElement(container);
+
+    portfolio.portfolioTextHeadings.forEach(heading => {
         textSplit(heading);
     })
 
-    portfolioTextDates.forEach(date => {
+    portfolio.portfolioTextDates.forEach(date => {
         textSplit(date);
     })
 
-    const galleryContainer = container.querySelector(".gallery");
-    const galleryItems = galleryContainer.querySelectorAll(".gallery-item");
+    const galleryItems = portfolio.galleryContainer.querySelectorAll(".gallery-item");
 
     galleryItems[0].isHovered = true;
+
+    
     updategalleryItems('init', galleryItems);
+
+    const screenWidth = getScreenWidth();
 
     galleryItems.forEach((item) => {
         item.addEventListener("mouseenter", () => {
-            galleryItems.forEach((otherItem) => {
-                otherItem.isHovered = otherItem === item;
-            });
-            updategalleryItems('mouseenter', galleryItems);
+            // console.log('mouseenter')
+            if (screenWidth > 767) {
+                galleryItems.forEach((otherItem) => {
+                    otherItem.isHovered = otherItem === item;
+                });
+                updategalleryItems('mouseenter', galleryItems);
+            } else {
+                // console.log('mouseenter else')
+                const galleryItemTextWrapper = item.querySelector('.gallery-item-text-wrapper');
+                const galleryItemChars = item.querySelectorAll('.gallery-item-text-wrapper-wrapper > div > .word > .char ');
+                gsap.to(galleryItemTextWrapper, {opacity: 1, duration: 0.15, ease: 'power5.inOut'})
+                setTimeout(() => {
+                    staggerFadeLettersIn(galleryItemChars)
+                }, 10)
+            }
         });
         item.addEventListener("mouseleave", () => {
-            galleryItems.forEach((otherItem) => {
-                const itemTextWrapper = otherItem.querySelector('.gallery-item-text-wrapper');
-                gsap.to(itemTextWrapper, {opacity: 0, duration: 0.15, ease: 'power5.inOut'})
-            });
-        });
-        
+            // console.log('mouseleave')
+            if (screenWidth > 767) {
+                galleryItems.forEach((otherItem) => {
+                    const itemTextWrapper = otherItem.querySelector('.gallery-item-text-wrapper');
+                    gsap.to(itemTextWrapper, {opacity: 0, duration: 0.15, ease: 'power5.inOut'})
+                });
+            } else {
+                // console.log('mouseleave else')
+                const galleryItemTextWrapper = item.querySelector('.gallery-item-text-wrapper');
+                const galleryItemChars = item.querySelectorAll('.gallery-item-text-wrapper-wrapper > div > .word > .char ');
+                gsap.to(galleryItemTextWrapper, {opacity: 0, duration: 0.15, ease: 'power5.inOut'})
+                gsap.to(galleryItemChars, {color: 'transparent', duration: 0.15, ease: 'power5.inOut'})
+            }
+        }); 
     });
-
-    gsap.set(gallery, {
+    
+    gsap.set(portfolio.gallery, {
         opacity: 0,
         yPercent: 50,
     })
@@ -77,9 +110,8 @@ const staggerFadeLettersIn = (elem) => {
     })
 }
 
-
 const updategalleryItems = (type, galleryItems) => {
-    // console.log('updategalleryItems:', type)
+    console.log('updategalleryItems:', type)
 
     galleryItems.forEach((item) => {
         const galleryItemTextWrapper = item.querySelector('.gallery-item-text-wrapper');
@@ -87,7 +119,7 @@ const updategalleryItems = (type, galleryItems) => {
 
         let flex = defaultItemFlex;
         let opacity = 0;
-        let delay;
+        let delay = 500;
         delay = type === 'mouseenter' ? 750 : 10;
 
         if (item.isHovered) {

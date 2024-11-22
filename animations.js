@@ -40,7 +40,7 @@ const introBgFadeOut = () => {
 export const imgTransitionAnimation = (data) => {
     console.log('imgTransitionAnimation')
     return new Promise((resolve) => {
-        const tl = gsap.timeline()
+        gsap.timeline()
             .add(() => introImagesEnter())
             .add(() => introImageScaleUp(), 0)
             .add(() => introImagesLeave(), 2.175)

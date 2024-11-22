@@ -1,5 +1,5 @@
 #welcome-h2 {
-    font-size: clamp(180px, calc(11.25rem + ((1vw - 9.92px) * 17.1569)), 250px);
+    /* font-size: clamp(180px, calc(11.25rem + ((1vw - 9.92px) * 17.1569)), 250px); */
     min-height: 0vw;
 }
 
