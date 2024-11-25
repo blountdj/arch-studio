@@ -1,3 +1,5 @@
+
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v3/config.js";
 const { textSplit } = await import(`${CONFIG.path}utilities.js`);
 
 const createMaskBoxes = (mask) => {

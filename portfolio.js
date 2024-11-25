@@ -1,5 +1,6 @@
 // console.log('portfolio.js')
 
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v3/config.js";
 const { textSplit }  = await import(`${CONFIG.path}utilities.js`);
 
 const defaultItemFlex = "0 1 32px";

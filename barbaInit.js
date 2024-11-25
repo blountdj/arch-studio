@@ -1,6 +1,6 @@
 // console.log('barbaInit.js loaded')
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v2/config.js";
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v3/config.js";
 
 const { homeInit } = await import(`${CONFIG.path}home.js`);
 const { aboutInit } = await import(`${CONFIG.path}about.js`);
