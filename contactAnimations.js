@@ -1,4 +1,4 @@
-import { textSplit } from "./utilities.js";
+const { textSplit }  = await import(`${CONFIG.path}utilities.js`);
 
 const createMaskBoxes = (mask) => {
     for (let i = 0; i < 30; i++) {
@@ -44,7 +44,7 @@ function imageReveal() {
 }
 
 export function contactAnimationInit(container) {
-    console.log('contactAnimationInit')
+    // console.log('contactAnimationInit')
     const headingContainer = container.querySelector('.contact-hero')
     const headingWidth = headingContainer.offsetWidth;  
     gsap.set(headingContainer, { width: headingWidth });
@@ -75,7 +75,7 @@ export function contactAnimationInit(container) {
 }
 
 export function contactAnimationEnter(container) {
-    console.log('contactAnimationEnter')
+    // console.log('contactAnimationEnter')
     
     // const heroH1 = container.querySelector('#home-h1')
     const heroHeadingM = container.querySelector('.heading-m')
@@ -86,9 +86,5 @@ export function contactAnimationEnter(container) {
     .add(() => headingFontWeightAnimation('.heading-xl--contact > .word > .char'), 0.3)
     .add(() => fadeInSlideUp(heroHeadingM), 0.7)
     .add(() => fadeInSlideUp(heroParagraph), 0.9)
-    // .add(() => introImageScaleUp(), 0)
-    // .add(() => introImagesLeave(), 2.175)
-    // .add(() => introBgFadeOut(), 2.75)
-    // .add(() => resolve(), 3.25)
 }
 

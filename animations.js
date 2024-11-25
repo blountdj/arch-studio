@@ -38,7 +38,7 @@ const introBgFadeOut = () => {
 }
 
 export const imgTransitionAnimation = (data) => {
-    console.log('imgTransitionAnimation')
+    // console.log('imgTransitionAnimation')
     return new Promise((resolve) => {
         gsap.timeline()
             .add(() => introImagesEnter())

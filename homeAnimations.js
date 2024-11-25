@@ -1,4 +1,4 @@
-import { textSplit } from "./utilities.js";
+const { textSplit }  = await import(`${CONFIG.path}utilities.js`);
 
 const createMaskBoxes = (mask) => {
     for (let i = 0; i < 30; i++) {
@@ -9,7 +9,7 @@ const createMaskBoxes = (mask) => {
 };
 
 export function homeAnimationInit(container) {
-    console.log('homeAnimationInit')
+    // console.log('homeAnimationInit')
     // const headingContainer = container.querySelector('.welcome-main')
     // const headingWidth = headingContainer.offsetWidth;  
     // console.log('headingWidth:', headingWidth)
@@ -22,7 +22,7 @@ export function homeAnimationInit(container) {
 
     // Hero Image
     const heroImage = container.querySelector('.home-hero-slide.is-active')
-    console.log('heroImage:', heroImage)
+    // console.log('heroImage:', heroImage)
     const mask = document.createElement("div");
     // mask.classList.add("mask", `m-${i}`);
     mask.classList.add("mask");
@@ -79,7 +79,7 @@ function imageReveal() {
 
 
 export function homeAnimationEnter(container) {
-    console.log('homeAnimationEnter')
+    // console.log('homeAnimationEnter')
     
     const heroH1 = container.querySelector('#home-h1')
     const heroText = container.querySelector('.home-hero-text')

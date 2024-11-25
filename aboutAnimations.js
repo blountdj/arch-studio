@@ -1,4 +1,4 @@
-import { textSplit } from "./utilities.js";
+const { textSplit } = await import(`${CONFIG.path}utilities.js`);
 
 const createMaskBoxes = (mask) => {
     for (let i = 0; i < 30; i++) {
@@ -44,11 +44,7 @@ function imageReveal() {
 }
 
 export function aboutAnimationInit(container) {
-    console.log('aboutAnimationInit')
-    // const headingContainer = container.querySelector('.about-hero')
-    // const headingWidth = headingContainer.offsetWidth;  
-    // gsap.set(headingContainer, { width: headingWidth });
-
+    // console.log('aboutAnimationInit')
 
     const heading = container.querySelector('.heading-xl--about')
     textSplit(heading)
@@ -76,7 +72,7 @@ export function aboutAnimationInit(container) {
 }
 
 export function aboutAnimationEnter(container) {
-    console.log('aboutAnimationEnter')
+    // console.log('aboutAnimationEnter')
     
     // const heroH1 = container.querySelector('#home-h1')
     const heroHeadingM = container.querySelector('.heading-m')
@@ -87,9 +83,5 @@ export function aboutAnimationEnter(container) {
     .add(() => headingFontWeightAnimation('.heading-xl--about > .word > .char'), 0.3)
     .add(() => fadeInSlideUp(heroHeadingM), 0.6)
     .add(() => fadeInSlideUp(heroParagraph), 0.8)
-    // .add(() => introImageScaleUp(), 0)
-    // .add(() => introImagesLeave(), 2.175)
-    // .add(() => introBgFadeOut(), 2.75)
-    // .add(() => resolve(), 3.25)
 }
 

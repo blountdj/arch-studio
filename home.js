@@ -1,5 +1,3 @@
- 
-console.log('home.js')
     
 export function homeInit(container) {
     const heroSlide01 = container.querySelector('[data-slide="01"]');

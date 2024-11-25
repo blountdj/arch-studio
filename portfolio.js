@@ -1,6 +1,6 @@
-console.log('portfolio.js')
+// console.log('portfolio.js')
 
-import { textSplit } from './utilities.js';
+const { textSplit }  = await import(`${CONFIG.path}utilities.js`);
 
 const defaultItemFlex = "0 1 32px";
 const hoverItemFlex = "1 1 600px";
@@ -111,7 +111,7 @@ const staggerFadeLettersIn = (elem) => {
 }
 
 const updategalleryItems = (type, galleryItems) => {
-    console.log('updategalleryItems:', type)
+    // console.log('updategalleryItems:', type)
 
     galleryItems.forEach((item) => {
         const galleryItemTextWrapper = item.querySelector('.gallery-item-text-wrapper');

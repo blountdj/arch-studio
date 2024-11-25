@@ -1,3 +1,5 @@
 export const CONFIG = {
-    barbaDebug: true,
+    barbaDebug: false,
+    // path: './',
+    path: 'https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v2/',
   };

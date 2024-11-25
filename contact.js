@@ -1,27 +1,99 @@
-var Webflow = Webflow || []; // Initialize Webflow Variable
-Webflow.push(function() { // Push a Function into the Webflow Array
-//   console.log('webflow push worked')
 
-  const nameInputWrapper = document.getElementById('contact-name');
-  const emailInputWrapper = document.getElementById('contact-email');
-  const messageInputWrapper = document.getElementById('contact-message'); 
 
-  const nameInput = nameInputWrapper.querySelector('input');
-  const nameErrorMsgWrapper = nameInputWrapper.querySelector('.input-error-wrapper');
-  const nameErrorMsgText = nameErrorMsgWrapper.querySelector('.form-error-message');
+export const contactFormInit = (container) => {
+    // console.log('contactFormInit');
+    
+    // Create a promise that resolves when Webflow is available
+    const webflowReady = new Promise((resolve) => {
+        const checkWebflow = () => {
+            if (window.Webflow) {
+                resolve(window.Webflow);
+            } else {
+                setTimeout(checkWebflow, 100);
+            }
+        };
+        checkWebflow();
+    });
 
-  const emailInput = emailInputWrapper.querySelector('input');
-  const emailErrorMsgWrapper = emailInputWrapper.querySelector('.input-error-wrapper');
-  const emailErrorMsgText = emailErrorMsgWrapper.querySelector('.form-error-message');
+    // Use the promise
+    webflowReady.then((Webflow) => {
+        if (Webflow.destroy) {
+            Webflow.destroy();
+        }
 
-  const messageInput = messageInputWrapper.querySelector('textarea');
-  const messageErrorMsgWrapper = messageInputWrapper.querySelector('.input-error-wrapper');
-  const messageErrorMsgText = messageErrorMsgWrapper.querySelector('.form2-error-message');
+        Webflow.push(function() {
 
-  const connectH2Elem = document.getElementById('connect-h2');
-  const connectGrid = document.getElementById('connect-grid');
+        const nameInputWrapper = document.getElementById('contact-name');
+        const emailInputWrapper = document.getElementById('contact-email');
+        const messageInputWrapper = document.getElementById('contact-message'); 
 
-  function addErrorMessage(wrapper, textElem, errorMessage) {
+        const nameInput = nameInputWrapper.querySelector('input');
+        const nameErrorMsgWrapper = nameInputWrapper.querySelector('.input-error-wrapper');
+        const nameErrorMsgText = nameErrorMsgWrapper.querySelector('.form-error-message');
+
+        const emailInput = emailInputWrapper.querySelector('input');
+        const emailErrorMsgWrapper = emailInputWrapper.querySelector('.input-error-wrapper');
+        const emailErrorMsgText = emailErrorMsgWrapper.querySelector('.form-error-message');
+
+        const messageInput = messageInputWrapper.querySelector('textarea');
+        const messageErrorMsgWrapper = messageInputWrapper.querySelector('.input-error-wrapper');
+        const messageErrorMsgText = messageErrorMsgWrapper.querySelector('.form2-error-message');
+
+        const connectH2Elem = document.getElementById('connect-h2');
+        const connectGrid = document.getElementById('connect-grid');
+
+        $('[wr-type="submit"]').click(function() { 
+            // console.log('click')
+            let isOk = runFormSubmitChecks(); // Use this to define whether isOk is true or false
+
+            if (isOk) {
+                // console.log('submitting')
+                const successNameTextElem = document.getElementById('success-name-text');
+                successNameTextElem.innerHTML = nameInput.value;
+                $(this).parents('form').submit()
+                setTimeout(function() {
+                    connectH2Elem.classList.add('hidden');
+                connectGrid.classList.add('2-cols');    
+                }, 1000)
+            }
+        }); // end submit
+
+
+        function runFormSubmitChecks() {
+            // console.log('runFormSubmitChecks')
+
+            let errors = [];
+
+            errors.push(checkNameInput(nameInput, nameErrorMsgWrapper, nameErrorMsgText));
+            errors.push(checkEmailInput(emailInput, emailErrorMsgWrapper, emailErrorMsgText));
+            errors.push(checkMessageInput(messageInput, messageErrorMsgWrapper, messageErrorMsgText));
+            // console.log('submit error: ', errors)
+            if (errors.includes(true)) {
+                // alert('Please check contact form errors')
+                return false;
+            } else {
+                // console.log('No Errors - continue')
+                return true;
+            }
+        }
+
+        function init() {
+            connectH2Elem.classList.remove('hidden');
+            connectGrid.classList.remove('2-cols');
+        }
+
+        init();
+
+        });
+
+        if (Webflow.ready) {
+            Webflow.ready();
+        }
+    });
+}
+
+
+function addErrorMessage(wrapper, textElem, errorMessage) {
     // console.log('addErrorMessage:', errorMessage)
     wrapper.classList.remove('hidden');
     textElem.textContent = errorMessage;
@@ -31,7 +103,7 @@ function removeErrorMessage(wrapper) {
     wrapper.classList.add('hidden');
 }
 
-  function checkInputLength(input, wrapper, textElem, minLength, errorMessage) {
+function checkInputLength(input, wrapper, textElem, minLength, errorMessage) {
     // console.log('input.value.length:', input.value.length, 'minLength:', minLength)
     if (input.value.length < minLength) {
         addErrorMessage(wrapper, textElem, errorMessage)
@@ -54,7 +126,7 @@ function checkEmptyInput(input, wrapper, textElem, errorMessage) {
     }
 }
 
-  function checkNameInput(input, wrapper, textElem) {
+function checkNameInput(input, wrapper, textElem) {
     const checks = [
         () => checkEmptyInput(input, wrapper, textElem, 'Please enter your name'),
         () => checkInputLength(input, wrapper, textElem, 2, 'Minimum 2 characters'),
@@ -130,50 +202,3 @@ function checkMessageInput(input, wrapper, textElem) {
         return false;
     }
 }
-
-  $('[wr-type="submit"]').click(function() { 
-    // console.log('click')
-    let isOk = runFormSubmitChecks(); // Use this to define whether isOk is true or false
-
-    if (isOk) {
-        // console.log('submitting')
-        const successNameTextElem = document.getElementById('success-name-text');
-        successNameTextElem.innerHTML = nameInput.value;
-        $(this).parents('form').submit()
-        setTimeout(function() {
-            connectH2Elem.classList.add('hidden');
-        connectGrid.classList.add('2-cols');    
-        }, 1000)
-    }
-    // } else {
-    //     console.log('not submitting')
-    // }
-  }); // end submit
-
-
-  function runFormSubmitChecks() {
-    console.log('runFormSubmitChecks')
-
-    let errors = [];
-
-    errors.push(checkNameInput(nameInput, nameErrorMsgWrapper, nameErrorMsgText));
-    errors.push(checkEmailInput(emailInput, emailErrorMsgWrapper, emailErrorMsgText));
-    errors.push(checkMessageInput(messageInput, messageErrorMsgWrapper, messageErrorMsgText));
-    console.log('submit error: ', errors)
-    if (errors.includes(true)) {
-        alert('Please check contact form errors')
-        return false;
-    } else {
-        console.log('No Errors - continue')
-        return true;
-    }
-  }
-
-  function init() {
-    connectH2Elem.classList.remove('hidden');
-    connectGrid.classList.remove('2-cols');
-  }
-
-  init();
-
-}); // end webflow.push()
