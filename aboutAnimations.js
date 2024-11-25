@@ -1,5 +1,5 @@
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v3/config.js";
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v4/config.js";
 const { textSplit } = await import(`${CONFIG.path}utilities.js`);
 
 const createMaskBoxes = (mask) => {
@@ -50,7 +50,7 @@ export function aboutAnimationInit(container) {
 
     const heading = container.querySelector('.heading-xl--about')
     textSplit(heading)
-    gsap.set('.heading-xl--about > .word > .char', {fontWeight: 300})
+    gsap.set('.heading-xl--about > .word > .char', { fontWeight: 300 })
 
     // Hero Image
     const heroImage = container.querySelector('.about-img-wrapper')
@@ -62,7 +62,7 @@ export function aboutAnimationInit(container) {
 
     setTimeout(() => {
         createMaskBoxes(mask)
-        gsap.set('.mask_box', {scaleX: 1});
+        gsap.set('.mask_box', { scaleX: 1 });
     }, 100);
 
     const heroHeadingM = container.querySelector('.heading-m')
@@ -75,15 +75,15 @@ export function aboutAnimationInit(container) {
 
 export function aboutAnimationEnter(container) {
     // console.log('aboutAnimationEnter')
-    
+
     // const heroH1 = container.querySelector('#home-h1')
     const heroHeadingM = container.querySelector('.heading-m')
     const heroParagraph = container.querySelector('.paragraph')
 
     gsap.timeline()
-    .add(() => imageReveal(), 0)
-    .add(() => headingFontWeightAnimation('.heading-xl--about > .word > .char'), 0.3)
-    .add(() => fadeInSlideUp(heroHeadingM), 0.6)
-    .add(() => fadeInSlideUp(heroParagraph), 0.8)
+        .add(() => imageReveal(), 0)
+        .add(() => headingFontWeightAnimation('.heading-xl--about > .word > .char'), 0.3)
+        .add(() => fadeInSlideUp(heroHeadingM), 0.6)
+        .add(() => fadeInSlideUp(heroParagraph), 0.8)
 }
 

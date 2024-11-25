@@ -1,6 +1,6 @@
 // console.log('barbaInit.js loaded')
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v3/config.js";
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v4/config.js";
 
 const { homeInit } = await import(`${CONFIG.path}home.js`);
 const { aboutInit } = await import(`${CONFIG.path}about.js`);
@@ -9,7 +9,7 @@ const { homeAnimationInit, homeAnimationEnter } = await import(`${CONFIG.path}ho
 const { initPortfolio, animatePortfolioEnter } = await import(`${CONFIG.path}portfolio.js`);
 const { aboutAnimationInit, aboutAnimationEnter } = await import(`${CONFIG.path}aboutAnimations.js`);
 const { contactAnimationInit, contactAnimationEnter } = await import(`${CONFIG.path}contactAnimations.js`);
-const { 
+const {
     textSplit,
     disableScroll,
     enableScroll,
@@ -19,8 +19,8 @@ const {
 const { imgTransitionAnimation, introElementsReset } = await import(`${CONFIG.path}animations.js`);
 
 
-const portfolioCssFileUrl = `http://127.0.0.1:5500/portfolio.css`
-const homeCssFileUrl = `http://127.0.0.1:5500/home.css`
+const portfolioCssFileUrl = CONFIG.path + `portfolio.css`
+const homeCssFileUrl = CONFIG.path + `home.css`
 
 
 const pageIdentifierTextEnter = async (data) => {
@@ -32,8 +32,8 @@ const pageIdentifierTextEnter = async (data) => {
     textSplit(pageIdentifierTextElem)
 
     return new Promise((resolve) => {
-        gsap.set('.page-identifer-text', {opacity: 1})
-        gsap.set('.page-identifer-text > .word >.char', {opacity: 0})
+        gsap.set('.page-identifer-text', { opacity: 1 })
+        gsap.set('.page-identifer-text > .word >.char', { opacity: 0 })
         gsap.to('.page-identifer-text > .word > .char', {
             opacity: 1,
             duration: 1.575,
@@ -114,7 +114,7 @@ const introAnimation = async (data) => {
         await imgTransitionAnimation(data);
         let pageIdentifierTextElem = document.querySelector('.page-identifer-text')
         textSplit(pageIdentifierTextElem)
-        gsap.set('.page-identifer-text > .word > .char', {color: 'white'})
+        gsap.set('.page-identifer-text > .word > .char', { color: 'white' })
         gsap.to('.page-identifer-text > .word > .char', {
             opacity: 1,
             duration: 2.575,
@@ -128,7 +128,7 @@ const introAnimation = async (data) => {
                 gsap.set(pageIdentifierTextElem, {
                     opacity: 1,
                 },
-                animationFadeInEnter(null))
+                    animationFadeInEnter(null))
             },
         })
         setTimeout(() => {
@@ -140,7 +140,7 @@ const introAnimation = async (data) => {
 
 
 barba.hooks.beforeEnter((data) => {
-//     // window.scrollTo(0, 0); // Scroll to the top of the page
+    //     // window.scrollTo(0, 0); // Scroll to the top of the page
     // console.log('## BEFORE ENTER')
     setTimeout(() => {
         window.scrollTo(0, 0);
@@ -149,10 +149,10 @@ barba.hooks.beforeEnter((data) => {
             color: 'white',
         })
     }, 100); // Adjust the delay time as needed
-    
+
     const currentPageId = data.next.namespace;
-    currentPageId === 'portfolio' ? addFilesCssToBody([portfolioCssFileUrl]) : removeCssFilesFromBody([portfolioCssFileUrl] )
-    currentPageId === 'home' ? addFilesCssToBody([homeCssFileUrl]) : removeCssFilesFromBody([homeCssFileUrl] )
+    currentPageId === 'portfolio' ? addFilesCssToBody([portfolioCssFileUrl]) : removeCssFilesFromBody([portfolioCssFileUrl])
+    currentPageId === 'home' ? addFilesCssToBody([homeCssFileUrl]) : removeCssFilesFromBody([homeCssFileUrl])
 
     if (data.next.namespace === 'home') {
         homeAnimationInit(data.next.container)
@@ -187,7 +187,7 @@ barba.hooks.once(async (data) => {
 barba.hooks.afterEnter((data) => {
     // console.log('barba.hooks.afterEnter')
     const currentPageId = data.next.namespace; // Assuming your container has an ID that matches the page
-       
+
 
     if (currentPageId === 'about us') {
         aboutInit()
@@ -205,12 +205,12 @@ barba.init({
         {
             name: 'page-fade-transition',
             // to: { namespace: ['todo'] },
-            once() {},
+            once() { },
             async leave(data) {
                 // console.log('\n\nLEAVE')
                 animationFadeOutLeave(data);
                 await introElementsReset()
-                
+
             },
             async enter(data) {
                 // console.log('\n\nENTER')

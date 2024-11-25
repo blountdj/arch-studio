@@ -1,6 +1,6 @@
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v3/config.js";
-const { textSplit }  = await import(`${CONFIG.path}utilities.js`);
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v4/config.js";
+const { textSplit } = await import(`${CONFIG.path}utilities.js`);
 
 const createMaskBoxes = (mask) => {
     for (let i = 0; i < 30; i++) {
@@ -48,12 +48,12 @@ function imageReveal() {
 export function contactAnimationInit(container) {
     // console.log('contactAnimationInit')
     const headingContainer = container.querySelector('.contact-hero')
-    const headingWidth = headingContainer.offsetWidth;  
+    const headingWidth = headingContainer.offsetWidth;
     gsap.set(headingContainer, { width: headingWidth });
 
     const heading = container.querySelector('.heading-xl--contact')
     textSplit(heading)
-    gsap.set('.heading-xl--contact > .word > .char', {fontWeight: 300})
+    gsap.set('.heading-xl--contact > .word > .char', { fontWeight: 300 })
 
     // Hero Image
     const heroImage = container.querySelector('.contact-img-wrapper')
@@ -65,7 +65,7 @@ export function contactAnimationInit(container) {
 
     setTimeout(() => {
         createMaskBoxes(mask)
-        gsap.set('.mask_box', {scaleX: 1});
+        gsap.set('.mask_box', { scaleX: 1 });
     }, 100);
 
     const heroHeadingM = container.querySelector('.heading-m')
@@ -78,15 +78,15 @@ export function contactAnimationInit(container) {
 
 export function contactAnimationEnter(container) {
     // console.log('contactAnimationEnter')
-    
+
     // const heroH1 = container.querySelector('#home-h1')
     const heroHeadingM = container.querySelector('.heading-m')
     const heroParagraph = container.querySelector('.paragraph')
 
     gsap.timeline()
-    .add(() => imageReveal(), 0)
-    .add(() => headingFontWeightAnimation('.heading-xl--contact > .word > .char'), 0.3)
-    .add(() => fadeInSlideUp(heroHeadingM), 0.7)
-    .add(() => fadeInSlideUp(heroParagraph), 0.9)
+        .add(() => imageReveal(), 0)
+        .add(() => headingFontWeightAnimation('.heading-xl--contact > .word > .char'), 0.3)
+        .add(() => fadeInSlideUp(heroHeadingM), 0.7)
+        .add(() => fadeInSlideUp(heroParagraph), 0.9)
 }
 

@@ -1,6 +1,6 @@
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v3/config.js";
-const { textSplit }  = await import(`${CONFIG.path}utilities.js`);
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v4/config.js";
+const { textSplit } = await import(`${CONFIG.path}utilities.js`);
 
 const createMaskBoxes = (mask) => {
     for (let i = 0; i < 30; i++) {
@@ -20,7 +20,7 @@ export function homeAnimationInit(container) {
 
     const heading = container.querySelector('#welcome-h2')
     textSplit(heading)
-    gsap.set('#welcome-h2 > .word > .char', {fontWeight: 300})
+    gsap.set('#welcome-h2 > .word > .char', { fontWeight: 300 })
 
     // Hero Image
     const heroImage = container.querySelector('.home-hero-slide.is-active')
@@ -32,7 +32,7 @@ export function homeAnimationInit(container) {
 
     setTimeout(() => {
         createMaskBoxes(mask)
-        gsap.set('.mask_box', {scaleX: 1});
+        gsap.set('.mask_box', { scaleX: 1 });
     }, 100);
 
     const heroH1 = container.querySelector('#home-h1')
@@ -82,17 +82,17 @@ function imageReveal() {
 
 export function homeAnimationEnter(container) {
     // console.log('homeAnimationEnter')
-    
+
     const heroH1 = container.querySelector('#home-h1')
     const heroText = container.querySelector('.home-hero-text')
     const heroBtn = container.querySelector('.btn-1.is-home-hero')
 
     gsap.timeline()
-    .add(() => imageReveal(), 0.5)
-    .add(() => fadeInSlideUp(heroH1), 1.4)
-    .add(() => fadeInSlideUp(heroText), 1.6)
-    .add(() => fadeInSlideUp(heroBtn), 1.7)
-    .add(() => headingFontWeightAnimation('#welcome-h2 > .word > .char'), 2.25)
+        .add(() => imageReveal(), 0.5)
+        .add(() => fadeInSlideUp(heroH1), 1.4)
+        .add(() => fadeInSlideUp(heroText), 1.6)
+        .add(() => fadeInSlideUp(heroBtn), 1.7)
+        .add(() => headingFontWeightAnimation('#welcome-h2 > .word > .char'), 2.25)
     // .add(() => introImageScaleUp(), 0)
     // .add(() => introImagesLeave(), 2.175)
     // .add(() => introBgFadeOut(), 2.75)

@@ -1,7 +1,7 @@
 // console.log('portfolio.js')
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v3/config.js";
-const { textSplit }  = await import(`${CONFIG.path}utilities.js`);
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v4/config.js";
+const { textSplit } = await import(`${CONFIG.path}utilities.js`);
 
 const defaultItemFlex = "0 1 32px";
 const hoverItemFlex = "1 1 600px";
@@ -37,7 +37,7 @@ export function initPortfolio(container) {
 
     galleryItems[0].isHovered = true;
 
-    
+
     updategalleryItems('init', galleryItems);
 
     const screenWidth = getScreenWidth();
@@ -54,7 +54,7 @@ export function initPortfolio(container) {
                 // console.log('mouseenter else')
                 const galleryItemTextWrapper = item.querySelector('.gallery-item-text-wrapper');
                 const galleryItemChars = item.querySelectorAll('.gallery-item-text-wrapper-wrapper > div > .word > .char ');
-                gsap.to(galleryItemTextWrapper, {opacity: 1, duration: 0.15, ease: 'power5.inOut'})
+                gsap.to(galleryItemTextWrapper, { opacity: 1, duration: 0.15, ease: 'power5.inOut' })
                 setTimeout(() => {
                     staggerFadeLettersIn(galleryItemChars)
                 }, 10)
@@ -65,18 +65,18 @@ export function initPortfolio(container) {
             if (screenWidth > 767) {
                 galleryItems.forEach((otherItem) => {
                     const itemTextWrapper = otherItem.querySelector('.gallery-item-text-wrapper');
-                    gsap.to(itemTextWrapper, {opacity: 0, duration: 0.15, ease: 'power5.inOut'})
+                    gsap.to(itemTextWrapper, { opacity: 0, duration: 0.15, ease: 'power5.inOut' })
                 });
             } else {
                 // console.log('mouseleave else')
                 const galleryItemTextWrapper = item.querySelector('.gallery-item-text-wrapper');
                 const galleryItemChars = item.querySelectorAll('.gallery-item-text-wrapper-wrapper > div > .word > .char ');
-                gsap.to(galleryItemTextWrapper, {opacity: 0, duration: 0.15, ease: 'power5.inOut'})
-                gsap.to(galleryItemChars, {color: 'transparent', duration: 0.15, ease: 'power5.inOut'})
+                gsap.to(galleryItemTextWrapper, { opacity: 0, duration: 0.15, ease: 'power5.inOut' })
+                gsap.to(galleryItemChars, { color: 'transparent', duration: 0.15, ease: 'power5.inOut' })
             }
-        }); 
+        });
     });
-    
+
     gsap.set(portfolio.gallery, {
         opacity: 0,
         yPercent: 50,
@@ -139,10 +139,10 @@ const updategalleryItems = (type, galleryItems) => {
         }
 
         item.style.flex = flex;
-        setTimeout(() => {    
+        setTimeout(() => {
             galleryItemTextWrapper.style.opacity = opacity;
         }, delay)
 
-    });  
+    });
 };
 
