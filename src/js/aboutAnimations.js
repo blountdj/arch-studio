@@ -1,5 +1,5 @@
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v4/config.js";
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v5/config.js";
 const { textSplit } = await import(`${CONFIG.path}utilities.js`);
 
 const createMaskBoxes = (mask) => {
@@ -76,7 +76,6 @@ export function aboutAnimationInit(container) {
 export function aboutAnimationEnter(container) {
     // console.log('aboutAnimationEnter')
 
-    // const heroH1 = container.querySelector('#home-h1')
     const heroHeadingM = container.querySelector('.heading-m')
     const heroParagraph = container.querySelector('.paragraph')
 

@@ -1,26 +1,26 @@
 // console.log('barbaInit.js loaded')
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v4/config.js";
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v5/config${CONFIG.jsEnd}.js";
 
-const { homeInit } = await import(`${CONFIG.path}home.js`);
-const { aboutInit } = await import(`${CONFIG.path}about.js`);
-const { contactFormInit } = await import(`${CONFIG.path}contact.js`);
-const { homeAnimationInit, homeAnimationEnter } = await import(`${CONFIG.path}homeAnimations.js`);
-const { initPortfolio, animatePortfolioEnter } = await import(`${CONFIG.path}portfolio.js`);
-const { aboutAnimationInit, aboutAnimationEnter } = await import(`${CONFIG.path}aboutAnimations.js`);
-const { contactAnimationInit, contactAnimationEnter } = await import(`${CONFIG.path}contactAnimations.js`);
+const { homeInit } = await import(`${CONFIG.path}${CONFIG.folder}js/home${CONFIG.jsEnd}.js`);
+const { aboutInit } = await import(`${CONFIG.path}${CONFIG.folder}js/about${CONFIG.jsEnd}.js`);
+const { contactFormInit } = await import(`${CONFIG.path}${CONFIG.folder}js/contact${CONFIG.jsEnd}.js`);
+const { homeAnimationInit, homeAnimationEnter } = await import(`${CONFIG.path}${CONFIG.folder}js/homeAnimations${CONFIG.jsEnd}.js`);
+const { initPortfolio, animatePortfolioEnter } = await import(`${CONFIG.path}${CONFIG.folder}js/portfolio${CONFIG.jsEnd}.js`);
+const { aboutAnimationInit, aboutAnimationEnter } = await import(`${CONFIG.path}${CONFIG.folder}js/aboutAnimations${CONFIG.jsEnd}.js`);
+const { contactAnimationInit, contactAnimationEnter } = await import(`${CONFIG.path}${CONFIG.folder}js/contactAnimations${CONFIG.jsEnd}.js`);
 const {
     textSplit,
     disableScroll,
     enableScroll,
     addFilesCssToBody,
     removeCssFilesFromBody,
-} = await import(`${CONFIG.path}utilities.js`);
-const { imgTransitionAnimation, introElementsReset } = await import(`${CONFIG.path}animations.js`);
+} = await import(`${CONFIG.path}${CONFIG.folder}js/utilities${CONFIG.jsEnd}.js`);
+const { imgTransitionAnimation, introElementsReset } = await import(`${CONFIG.path}${CONFIG.folder}js/animations${CONFIG.jsEnd}.js`);
 
 
-const portfolioCssFileUrl = CONFIG.path + `portfolio.css`
-const homeCssFileUrl = CONFIG.path + `home.css`
+const portfolioCssFileUrl = `${CONFIG.path}${CONFIG.folder}css/portfolio${CONFIG.cssEnd}.css`
+// const homeCssFileUrl = CONFIG.path + `home.css`
 
 
 const pageIdentifierTextEnter = async (data) => {
@@ -152,7 +152,11 @@ barba.hooks.beforeEnter((data) => {
 
     const currentPageId = data.next.namespace;
     currentPageId === 'portfolio' ? addFilesCssToBody([portfolioCssFileUrl]) : removeCssFilesFromBody([portfolioCssFileUrl])
-    currentPageId === 'home' ? addFilesCssToBody([homeCssFileUrl]) : removeCssFilesFromBody([homeCssFileUrl])
+    // currentPageId === 'home' ? addFilesCssToBody([homeCssFileUrl]) : removeCssFilesFromBody([homeCssFileUrl])
+
+    const menuOverlay = document.querySelector('#w-nav-overlay-0')
+    menuOverlay.style.display = 'none'
+
 
     if (data.next.namespace === 'home') {
         homeAnimationInit(data.next.container)

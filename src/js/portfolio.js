@@ -1,6 +1,6 @@
 // console.log('portfolio.js')
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v4/config.js";
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v5/config.js";
 const { textSplit } = await import(`${CONFIG.path}utilities.js`);
 
 const defaultItemFlex = "0 1 32px";
@@ -35,8 +35,7 @@ export function initPortfolio(container) {
 
     const galleryItems = portfolio.galleryContainer.querySelectorAll(".gallery-item");
 
-    galleryItems[0].isHovered = true;
-
+    // galleryItems[0].isHovered = true;
 
     updategalleryItems('init', galleryItems);
 

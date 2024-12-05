@@ -1,5 +1,5 @@
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v4/config.js";
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v5/config.js";
 const { textSplit } = await import(`${CONFIG.path}utilities.js`);
 
 const createMaskBoxes = (mask) => {
@@ -35,7 +35,7 @@ export function homeAnimationInit(container) {
         gsap.set('.mask_box', { scaleX: 1 });
     }, 100);
 
-    const heroH1 = container.querySelector('#home-h1')
+    const heroH1 = container.querySelector('.heading-l')
     const heroText = container.querySelector('.home-hero-text')
     const heroBtn = container.querySelector('.btn-1.is-home-hero')
     gsap.set([heroH1, heroText, heroBtn], {
@@ -83,7 +83,7 @@ function imageReveal() {
 export function homeAnimationEnter(container) {
     // console.log('homeAnimationEnter')
 
-    const heroH1 = container.querySelector('#home-h1')
+    const heroH1 = container.querySelector('.heading-l')
     const heroText = container.querySelector('.home-hero-text')
     const heroBtn = container.querySelector('.btn-1.is-home-hero')
 

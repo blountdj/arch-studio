@@ -43,7 +43,7 @@ export const imgTransitionAnimation = (data) => {
         gsap.timeline()
             .add(() => introImagesEnter())
             .add(() => introImageScaleUp(), 0)
-            .add(() => introImagesLeave(), 2.175)
+            .add(() => introImagesLeave(), 2.115)
             .add(() => introBgFadeOut(), 2.75)
             .add(() => resolve(), 3.25)
     })
