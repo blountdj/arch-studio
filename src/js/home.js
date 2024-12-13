@@ -12,7 +12,7 @@ export function homeInit(container) {
     let heroBtn04 = container.querySelector('[data-id="04"]');
     let heroButtons = [heroBtn01, heroBtn02, heroBtn03, heroBtn04];
 
-    const heroWrapper = container.querySelector('.home-hero')
+    const heroWrapper = container.querySelector('.home_hero_wrap')
 
     const heroIdsToSlides = {
         '01': heroSlide01,
