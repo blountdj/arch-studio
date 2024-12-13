@@ -1,5 +1,5 @@
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v8/min/js/config.min.js";
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v9/min/js/config.min.js";
 const { textSplit } = await import(`${CONFIG.path}${CONFIG.folder}js/utilities${CONFIG.jsEnd}.js`);
 
 const createMaskBoxes = (mask) => {
@@ -23,7 +23,7 @@ export function homeAnimationInit(container) {
     gsap.set('#welcome-h2 > .word > .char', { fontWeight: 300 })
 
     // Hero Image
-    const heroImage = container.querySelector('.home-hero-slide.is-active')
+    const heroImage = container.querySelector('.home_hero_slide_wrap.is-active')
     // console.log('heroImage:', heroImage)
     const mask = document.createElement("div");
     // mask.classList.add("mask", `m-${i}`);
@@ -35,9 +35,9 @@ export function homeAnimationInit(container) {
         gsap.set('.mask_box', { scaleX: 1 });
     }, 100);
 
-    const heroH1 = container.querySelector('.heading-l')
+    const heroH1 = container.querySelector('.g_heading_l')
     const heroText = container.querySelector('.home-hero-text')
-    const heroBtn = container.querySelector('.btn-1.is-home-hero')
+    const heroBtn = container.querySelector('.g_btn_1_wrap.is-home-hero')
     gsap.set([heroH1, heroText, heroBtn], {
         opacity: 0,
         yPercent: 100,
@@ -83,9 +83,9 @@ function imageReveal() {
 export function homeAnimationEnter(container) {
     // console.log('homeAnimationEnter')
 
-    const heroH1 = container.querySelector('.heading-l')
+    const heroH1 = container.querySelector('.g_heading_l')
     const heroText = container.querySelector('.home-hero-text')
-    const heroBtn = container.querySelector('.btn-1.is-home-hero')
+    const heroBtn = container.querySelector('.g_btn_1_wrap.is-home-hero')
 
     gsap.timeline()
         .add(() => imageReveal(), 0.5)

@@ -1,7 +1,7 @@
 export const CONFIG = {
   barbaDebug: false,
   path: './',
-  path: 'https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v8/',
+  path: 'https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v9/',
   // folder: 'src/',
   folder: 'min/',
   // pathCSS: 'https://192.168.1.131:5500/',
