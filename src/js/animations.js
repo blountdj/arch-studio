@@ -21,7 +21,7 @@ const introImagesLeave = () => {
 }
 
 const introImageScaleUp = () => {
-    gsap.to(".intro_img", {
+    gsap.to(".g_intro_wrap", {
         scale: 1.3,
         duration: 3,
         ease: "power3.inOut",
@@ -29,7 +29,7 @@ const introImageScaleUp = () => {
 }
 
 const introBgFadeOut = () => {
-    gsap.to(".intro_img", {
+    gsap.to(".g_intro_wrap", {
         autoAlpha: 0,
         scale: 1,
         duration: 0.5,
