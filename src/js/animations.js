@@ -1,7 +1,7 @@
 
 
 const introImagesEnter = () => {
-    gsap.to('.intro-images > img', {
+    gsap.to('.g_intro_wrap > img', {
         clipPath: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
         // clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
         duration: 1,
@@ -12,7 +12,7 @@ const introImagesEnter = () => {
 }
 
 const introImagesLeave = () => {
-    gsap.to(".intro-images > img", {
+    gsap.to(".g_intro_wrap > img", {
         clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
         // autoAlpha: 0,
         duration: 0.5,
@@ -21,7 +21,7 @@ const introImagesLeave = () => {
 }
 
 const introImageScaleUp = () => {
-    gsap.to(".intro-images", {
+    gsap.to(".intro_img", {
         scale: 1.3,
         duration: 3,
         ease: "power3.inOut",
@@ -29,7 +29,7 @@ const introImageScaleUp = () => {
 }
 
 const introBgFadeOut = () => {
-    gsap.to(".intro-images", {
+    gsap.to(".intro_img", {
         autoAlpha: 0,
         scale: 1,
         duration: 0.5,
@@ -51,8 +51,8 @@ export const imgTransitionAnimation = (data) => {
 
 export const introElementsReset = () => {
     return new Promise((resolve) => {
-        gsap.set(".intro-images > img", {clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"})
-        gsap.to(".intro-images", {
+        gsap.set(".g_intro_wrap > img", {clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"})
+        gsap.to(".intro_img", {
             autoAlpha: 1,
             // scale: 1,
             duration: 0.5,

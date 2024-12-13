@@ -33,16 +33,16 @@
     }
 }
 
-.btn-arrow {
+.btn_arrow {
     animation: none; /* Adjust the duration as needed */
 }
 
-.btn-1:hover .btn-arrow {
+.g_btn_1_wrap:hover .btn_arrow {
     animation: pointToRight 2s infinite; /* Stop the animation on hover */
 }
 
 /* Featured Grid*/
-.featured-grid-card::before {
+.featured_grid_card::before {
     content: "";
     position: absolute;
     top: 0;
@@ -55,15 +55,15 @@
     transition: opacity 0.5s; 
 }
 
-.featured-grid-card:hover::before {
+.featured_grid_card:hover::before {
     opacity: 1;
 }
 
-.featured-grid-card:hover .featured-card-img-wrapper {
+.featured_grid_card:hover .featured_grid_card_image {
     transform: scale(1.15);
 }
 
-.featured-card-img-wrapper {
+.featured_grid_card_image {
     transform: scale(1.0);
     transition: transform 0.5s; 
 }

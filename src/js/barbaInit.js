@@ -1,6 +1,6 @@
 // console.log('barbaInit.js loaded')
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v7/min/js/config.min.js";
+import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v8/min/js/config.min.js";
 
 const { homeInit } = await import(`${CONFIG.path}${CONFIG.folder}js/home${CONFIG.jsEnd}.js`);
 const { aboutInit } = await import(`${CONFIG.path}${CONFIG.folder}js/about${CONFIG.jsEnd}.js`);
@@ -26,15 +26,15 @@ const portfolioCssFileUrl = `${CONFIG.path}${CONFIG.folder}css/portfolio${CONFIG
 const pageIdentifierTextEnter = async (data) => {
     // console.log('\n\n### pageIdentifierTextEnter')
 
-    let pageIdentifierTextElem = data.next.container.querySelector('.page-identifer-text')
+    let pageIdentifierTextElem = data.next.container.querySelector('.page_identifer_text')
     // console.log('pageIdentifierTextElem - barba.hooks.enter:', pageIdentifierTextElem)
 
     textSplit(pageIdentifierTextElem)
 
     return new Promise((resolve) => {
-        gsap.set('.page-identifer-text', { opacity: 1 })
-        gsap.set('.page-identifer-text > .word >.char', { opacity: 0 })
-        gsap.to('.page-identifer-text > .word > .char', {
+        gsap.set('.page_identifer_text', { opacity: 1 })
+        gsap.set('.page_identifer_text > .word >.char', { opacity: 0 })
+        gsap.to('.page_identifer_text > .word > .char', {
             opacity: 1,
             duration: 1.575,
             stagger: {
@@ -52,7 +52,7 @@ const pageIdentifierTextEnter = async (data) => {
 const pageIdentifierTextLeave = (data) => {
     // console.log('pageIdentifierTextLeave')
     // console.log('data.next.namespace:', data.next.namespace)
-    let pageIdentifierTextElem = document.querySelector('.page-identifer-text')
+    let pageIdentifierTextElem = document.querySelector('.page_identifer_text')
     // console.log('pageIdentifierTextElem0:', pageIdentifierTextElem)
 
     return new Promise((resolve) => {
@@ -76,7 +76,7 @@ const pageIdentifierTextLeave = (data) => {
 const animationFadeInEnter = ((data) => {
     // console.log('------animationFadeInEnter')
     // gsap.from(container, {
-    gsap.to('.barba-main-container', {
+    gsap.to('.barba_main_wrap', {
         duration: 2,
         autoAlpha: 1,
         // scale: 0.5,
@@ -94,7 +94,7 @@ const animationFadeInEnter = ((data) => {
 const animationFadeOutLeave = (data) => {
     // console.log('------animationFadeOutLeave');
     return new Promise((resolve) => {
-        gsap.to('.barba-main-container', {
+        gsap.to('.barba_main_wrap', {
             duration: 1.5,
             autoAlpha: 0,
             ease: 'power4.out',
@@ -112,10 +112,10 @@ const introAnimation = async (data) => {
     // console.log('introAnimation');
     return new Promise(async (resolve) => {
         await imgTransitionAnimation(data);
-        let pageIdentifierTextElem = document.querySelector('.page-identifer-text')
+        let pageIdentifierTextElem = document.querySelector('.page_identifer_text')
         textSplit(pageIdentifierTextElem)
-        gsap.set('.page-identifer-text > .word > .char', { color: 'white' })
-        gsap.to('.page-identifer-text > .word > .char', {
+        gsap.set('.page_identifer_text > .word > .char', { color: 'white' })
+        gsap.to('.page_identifer_text > .word > .char', {
             opacity: 1,
             duration: 2.575,
             color: '#c8ccd8',
@@ -145,7 +145,7 @@ barba.hooks.beforeEnter((data) => {
     setTimeout(() => {
         window.scrollTo(0, 0);
         disableScroll()
-        gsap.set('.page-identifer-text > .word > .char', {
+        gsap.set('.page_identifer_text > .word > .char', {
             color: 'white',
         })
     }, 100); // Adjust the delay time as needed
