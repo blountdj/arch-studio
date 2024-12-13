@@ -51,7 +51,7 @@ function getPreviousId(heroButtons) {
 }
 
 function heroBtnClick(event, heroIdsToButtons, heroIdsToSlides, heroWrapper, heroButtons) {
-
+    console.log('Event:', event)
     const prevId = getPreviousId(heroButtons)
     const newId = event.target.closest('.g_btn_4_light').dataset.id
 
