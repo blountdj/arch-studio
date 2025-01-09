@@ -1,4 +1,4 @@
-console.log('barbaInit.js loaded')
+// console.log('barbaInit.js loaded')
 
 // import { CONFIG_DEV } from "./config.js";
 import { CONFIG_PROD } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v15/min/js/config.min.js";
