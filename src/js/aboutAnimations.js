@@ -1,6 +1,10 @@
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v14/min/js/config.min.js";
-const { textSplit } = await import(`${CONFIG.path}${CONFIG.folder}js/utilities${CONFIG.jsEnd}.js`);
+// import { CONFIG_DEV } from "./config.js";
+import { CONFIG_PROD } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v15/min/js/config.min.js";
+
+const CONFIG = CONFIG_PROD;
+
+const { textSplit } = await import(`${CONFIG.path}${CONFIG.folder}utilities${CONFIG.jsEnd}.js`);
 
 const createMaskBoxes = (mask) => {
     for (let i = 0; i < 30; i++) {
@@ -48,9 +52,9 @@ function imageReveal() {
 export function aboutAnimationInit(container) {
     // console.log('aboutAnimationInit')
 
-    const heading = container.querySelector('.heading-xl--about')
+    const heading = container.querySelector('.heading_xl--about')
     textSplit(heading)
-    gsap.set('.heading-xl--about > .word > .char', { fontWeight: 300 })
+    gsap.set('.heading_xl--about > .word > .char', { fontWeight: 300 })
 
     // Hero Image
     const heroImage = container.querySelector('.about-img-wrapper')
@@ -65,8 +69,8 @@ export function aboutAnimationInit(container) {
         gsap.set('.mask_box', { scaleX: 1 });
     }, 100);
 
-    const heroHeadingM = container.querySelector('.heading-m')
-    const heroParagraph = container.querySelector('.paragraph')
+    const heroHeadingM = container.querySelector('.g_heading_m')
+    const heroParagraph = container.querySelector('.g_paragraph')
     gsap.set([heroHeadingM, heroParagraph], {
         opacity: 0,
         yPercent: 100,
@@ -76,12 +80,12 @@ export function aboutAnimationInit(container) {
 export function aboutAnimationEnter(container) {
     // console.log('aboutAnimationEnter')
 
-    const heroHeadingM = container.querySelector('.heading-m')
-    const heroParagraph = container.querySelector('.paragraph')
+    const heroHeadingM = container.querySelector('.g_heading_m')
+    const heroParagraph = container.querySelector('.g_paragraph')
 
     gsap.timeline()
         .add(() => imageReveal(), 0)
-        .add(() => headingFontWeightAnimation('.heading-xl--about > .word > .char'), 0.3)
+        .add(() => headingFontWeightAnimation('.heading_xl--about > .word > .char'), 0.3)
         .add(() => fadeInSlideUp(heroHeadingM), 0.6)
         .add(() => fadeInSlideUp(heroParagraph), 0.8)
 }

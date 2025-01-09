@@ -1,6 +1,10 @@
 
-import { CONFIG } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v14/min/js/config.min.js";
-const { textSplit } = await import(`${CONFIG.path}${CONFIG.folder}js/utilities${CONFIG.jsEnd}.js`);
+// import { CONFIG_DEV } from "./config.js";
+import { CONFIG_PROD } from "https://cdn.jsdelivr.net/gh/blountdj/arch-studio@v15/min/js/config.min.js";
+
+const CONFIG = CONFIG_PROD;
+
+const { textSplit } = await import(`${CONFIG.path}${CONFIG.folder}utilities${CONFIG.jsEnd}.js`);
 
 const createMaskBoxes = (mask) => {
     for (let i = 0; i < 30; i++) {

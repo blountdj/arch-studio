@@ -52,7 +52,7 @@ export const imgTransitionAnimation = (data) => {
 export const introElementsReset = () => {
     return new Promise((resolve) => {
         gsap.set(".g_intro_wrap > img", {clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"})
-        gsap.to(".intro_img", {
+        gsap.to(".g_intro_wrap", {
             autoAlpha: 1,
             // scale: 1,
             duration: 0.5,

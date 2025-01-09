@@ -1,18 +1,18 @@
 
 @media (min-width: 992px) {
-    .gallery-item {
+    .gallery_item_wrap {
         margin: 0 5px;
     }
 }
 
 @media (min-width: 767px) {
 
-  div.gallery-item {
+  div.gallery_item_wrap {
     flex: 0 1 20px;
     transition: flex 4s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
   
-  div.gallery-item img {
+  div.gallery_item_wrap img {
     object-fit: contain;
     transform: scale(2.2);
   }

@@ -1,7 +1,7 @@
 
 function getOverlay(event) {
-    const cardElem = event.target.closest('.leaders-grid-card');
-    const overlay = cardElem.querySelector('.leader-img-overlay');
+    const cardElem = event.target.closest('.about_leaders_grid_card');
+    const overlay = cardElem.querySelector('.leader_img_overlay');
     return overlay
 }
 
@@ -20,13 +20,13 @@ function getScreenWidth() {
 }
 
 function toggleOverlay(event) {
-    const card = event.target.closest('.leaders-grid-card')
-    const overlay = card.querySelector('.leader-img-overlay')
+    const card = event.target.closest('.about_leaders_grid_card')
+    const overlay = card.querySelector('.leader_img_overlay')
     overlay.classList.toggle('hidden')
 }
 
 export function aboutInit() {
-    const leaderCards = document.querySelectorAll('.leaders-grid-card')
+    const leaderCards = document.querySelectorAll('.about_leaders_grid_card')
 
     const screenWidth = getScreenWidth();
 
